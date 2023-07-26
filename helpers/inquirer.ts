@@ -1,6 +1,5 @@
-import inquirer, { QuestionCollection } from "inquirer";
-import color from "colors"
-
+import inquirer, { Answers, QuestionCollection } from "inquirer";
+import color from "colors";
 
 const preguntas: QuestionCollection<any> = [
   {
@@ -51,8 +50,25 @@ export const pausa = () => {
     {
       type: "input",
       name: "enter",
-      message: `Presione ${ color.green("Enter") } para continuar`
-    }
-  ]
+      message: `Presione ${color.green("Enter")} para continuar`,
+    },
+  ];
   return inquirer.prompt(question);
+};
+
+export const readInput = async (message: string) => {
+  const question: QuestionCollection<Answers> = [
+    {
+      type: "input",
+      name: "description",
+      message,
+      validate(value: string) {
+        if (value.length === 0) return "Por favor ingrese una descripción";
+        return true;
+      },
+    },
+  ];
+
+  const { description } = await inquirer.prompt(question);
+  return description;
 };
