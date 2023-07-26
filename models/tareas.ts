@@ -11,9 +11,7 @@ export class Tareas {
     this._listado.set(tarea.id, tarea);
   }
 
-  listarTareas() {
-    this._listado.forEach((tarea) => {
-      console.log(tarea.description);
-    });
+  get tareasArr(): Tarea[] {
+    return Array.from(this._listado.values());
   }
 }

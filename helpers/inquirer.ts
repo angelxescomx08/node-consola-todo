@@ -9,31 +9,31 @@ const preguntas: QuestionCollection<any> = [
     choices: [
       {
         value: "1",
-        name: "1. Crear tarea",
+        name: `${color.green("1.")} Crear tarea`,
       },
       {
         value: "2",
-        name: "2. Listar tareas",
+        name: `${color.green("2.")} Listar tareas`,
       },
       {
         value: "3",
-        name: "3. Listar tareas completadas",
+        name: `${color.green("3.")} Listar tareas completadas`,
       },
       {
         value: "4",
-        name: "4. Listar tareas pendientes",
+        name: `${color.green("4.")} Listar tareas pendientes`,
       },
       {
         value: "5",
-        name: "5. Completar tarea(s)",
+        name: `${color.green("5.")} Completar tarea(s)`,
       },
       {
         value: "6",
-        name: "6. Borrar tarea",
+        name: `${color.green("6.")} Borrar tarea`,
       },
       {
         value: "0",
-        name: "0. Salir",
+        name: `${color.green("0.")} Salir`,
       },
     ],
   },
