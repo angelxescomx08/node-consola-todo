@@ -14,4 +14,10 @@ export class Tareas {
   get tareasArr(): Tarea[] {
     return Array.from(this._listado.values());
   }
+
+  cargarTareasFromArr(tareas: Tarea[]) {
+    tareas.forEach((tarea) => {
+      this._listado.set(tarea.id, tarea);
+    });
+  }
 }

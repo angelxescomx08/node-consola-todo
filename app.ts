@@ -1,3 +1,4 @@
+import { guardarDB, leerDB } from "./helpers/guardarArchivo";
 import { inquirerMenu, pausa, readInput } from "./helpers/inquirer";
 import { Tareas } from "./models/tareas";
 
@@ -8,6 +9,10 @@ console.clear();
 const main = async () => {
   let opt = "";
   const tareas = new Tareas();
+  const data = leerDB();
+  if (data) {
+    tareas.cargarTareasFromArr(data);
+  }
   do {
     opt = await inquirerMenu();
 
@@ -20,6 +25,8 @@ const main = async () => {
         console.log(tareas.tareasArr);
         break;
     }
+
+    guardarDB(tareas.tareasArr);
     await pausa();
   } while (opt !== "0");
 };
