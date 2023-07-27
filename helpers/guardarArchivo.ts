@@ -12,5 +12,7 @@ export const leerDB = (): Tarea[] | null => {
 
   const data = fs.readFileSync(path, { encoding: "utf-8" });
 
+  if (!data) return null;
+
   return JSON.parse(data);
 };

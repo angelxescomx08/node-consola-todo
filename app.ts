@@ -22,7 +22,13 @@ const main = async () => {
         tareas.crearTarea(description);
         break;
       case "2":
-        console.log(tareas.tareasArr);
+        tareas.listadoCompleto();
+        break;
+      case "3":
+        tareas.listarTareasPorStatus(true);
+        break;
+      case "4":
+        tareas.listarTareasPorStatus(false);
         break;
     }
 
