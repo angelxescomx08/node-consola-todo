@@ -1,5 +1,10 @@
 import { guardarDB, leerDB } from "./helpers/guardarArchivo";
-import { inquirerMenu, pausa, readInput } from "./helpers/inquirer";
+import {
+  inquirerMenu,
+  listadoTareasBorrar,
+  pausa,
+  readInput,
+} from "./helpers/inquirer";
 import { Tareas } from "./models/tareas";
 
 require("colors");
@@ -29,6 +34,10 @@ const main = async () => {
         break;
       case "4":
         tareas.listarTareasPorStatus(false);
+        break;
+      case "6":
+        const id = await listadoTareasBorrar(tareas.tareasArr);
+        console.log({ id });
         break;
     }
 

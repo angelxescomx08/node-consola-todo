@@ -1,5 +1,6 @@
 import inquirer, { Answers, QuestionCollection } from "inquirer";
 import color from "colors";
+import { Tarea } from "../models/tarea";
 
 const preguntas: QuestionCollection<any> = [
   {
@@ -71,4 +72,21 @@ export const readInput = async (message: string) => {
 
   const { description } = await inquirer.prompt(question);
   return description;
+};
+
+export const listadoTareasBorrar = async (tareas: Tarea[]) => {
+  const choices = tareas.map((tarea, index) => ({
+    value: tarea.id,
+    name: `${color.green(`${index + 1}.`)} ${tarea.description}`,
+  }));
+  const preguntas: QuestionCollection<Answers> = [
+    {
+      type: "list",
+      name: "id",
+      message: "borrar",
+      choices,
+    },
+  ];
+  const { id } = await inquirer.prompt(preguntas);
+  return id;
 };
