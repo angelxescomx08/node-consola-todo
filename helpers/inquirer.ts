@@ -79,6 +79,10 @@ export const listadoTareasBorrar = async (tareas: Tarea[]) => {
     value: tarea.id,
     name: `${color.green(`${index + 1}.`)} ${tarea.description}`,
   }));
+  choices.unshift({
+    value: "0",
+    name: `${color.green("0.")} Cancelar`,
+  });
   const preguntas: QuestionCollection<Answers> = [
     {
       type: "list",
@@ -89,4 +93,36 @@ export const listadoTareasBorrar = async (tareas: Tarea[]) => {
   ];
   const { id } = await inquirer.prompt(preguntas);
   return id;
+};
+
+export const confirmar = async (message: string) => {
+  const question: QuestionCollection<Answers> = [
+    {
+      type: "confirm",
+      name: "ok",
+      message,
+    },
+  ];
+
+  const { ok } = await inquirer.prompt(question);
+  return ok;
+};
+
+export const mostrarListadoCheckList = async (tareas: Tarea[]) => {
+  const choices = tareas.map((tarea, index) => ({
+    value: tarea.id,
+    name: `${color.green(`${index + 1}.`)} ${tarea.description}`,
+    checked: !!tarea.completedDate,
+  }));
+
+  const pregunta: QuestionCollection<Answers> = [
+    {
+      type: "checkbox",
+      name: "ids",
+      message: "Selecciona",
+      choices,
+    },
+  ];
+  const { ids } = await inquirer.prompt(pregunta);
+  return ids;
 };

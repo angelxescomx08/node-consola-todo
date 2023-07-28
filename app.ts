@@ -1,7 +1,9 @@
 import { guardarDB, leerDB } from "./helpers/guardarArchivo";
 import {
+  confirmar,
   inquirerMenu,
   listadoTareasBorrar,
+  mostrarListadoCheckList,
   pausa,
   readInput,
 } from "./helpers/inquirer";
@@ -35,9 +37,21 @@ const main = async () => {
       case "4":
         tareas.listarTareasPorStatus(false);
         break;
+      case "5":
+        const ids = await mostrarListadoCheckList(tareas.tareasArr);
+        tareas.toggleCompletadas(ids);
+        break;
       case "6":
         const id = await listadoTareasBorrar(tareas.tareasArr);
-        console.log({ id });
+        if (id !== "0") {
+          const ok = await confirmar(
+            "¿Estás seguro de que deseas borrar la tarea?"
+          );
+          if (ok) {
+            tareas.borrarTarea(id);
+            console.log("Tarea borrada correctamente");
+          }
+        }
         break;
     }
 

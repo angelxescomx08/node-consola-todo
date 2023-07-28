@@ -25,7 +25,7 @@ export class Tareas {
   listadoCompleto() {
     this.tareasArr.forEach((tarea, index) => {
       console.log(
-        `${colors.green(`${index+1}.`)} ${tarea.description} :: ${
+        `${colors.green(`${index + 1}.`)} ${tarea.description} :: ${
           tarea.completedDate
             ? colors.green("Completada")
             : colors.yellow("Pendiente")
@@ -41,7 +41,7 @@ export class Tareas {
 
     tareas.forEach((tarea, index) => {
       console.log(
-        `${colors.green(`${index+1}.`)} ${tarea.description} :: ${
+        `${colors.green(`${index + 1}.`)} ${tarea.description} :: ${
           tarea.completedDate
             ? colors.green("Completada")
             : colors.yellow("Pendiente")
@@ -54,5 +54,20 @@ export class Tareas {
     if (this._listado.get(id)) {
       this._listado.delete(id);
     }
+  }
+
+  toggleCompletadas(ids: string[]) {
+    ids.forEach((id) => {
+      const tarea = this._listado.get(id);
+      if (!tarea!.completedDate) {
+        tarea!.completedDate = new Date().toISOString();
+      }
+    });
+
+    this._listado.forEach((tarea) => {
+      if (!ids.includes(tarea.id)) {
+        this._listado.get(tarea.id)!.completedDate = null;
+      }
+    });
   }
 }
